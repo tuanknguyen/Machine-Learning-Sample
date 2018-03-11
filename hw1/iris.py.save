@@ -1,0 +1,37 @@
+from keras.models import Sequential
+from keras.layers import Dense
+from sklearn.model_selection import train_test_split, KFold, cross_val_score
+import pandas as pd
+import numpy as np
+import tensorflow
+
+df = pd.read_csv('bezdekIris.data')
+df.columns = ['sepal_l', 'sepal_w', 'petal_l', 'petal_w', 'class']
+
+# one hot encoding
+ohe_labels = pd.get_dummies(df['class'])
+del df['class']
+print(ohe_labels.head(n=5))
+print(df.shape)
+# split train test data
+x_train, x_test, y_train, y_test = train_test_split(df, ohe_labels, test_size=0.1)
+
+# model
+def mymodel():
+	
+model = Sequential()
+model.add(Dense(7, input_dim=4, activation='relu'))
+model.add(Dense(5, activation='relu'))
+#model.add(Dense(4, activation='relu'))
+model.add(Dense(3, activation='softmax'))
+model.compile(loss='categorical_crossentropy', optimizer='rmsprop', metrics=['accuracy'])
+#model.fit(x_train, y_train, epochs=200, batch_size=5)
+	estimator = KerasClassifier(build_fn=mymodel, epochs=200, batch_size=5, verbose=0)
+
+
+# evaluate model
+kfold = KFold(n_splits=10, shuffle=True, random_state=seed)
+#scores = model.evaluate(x_test, y_test)
+results = cross_val_score(estimator, df, dummy_y, cv=kfold)
+print("Baseline: %.2f%% (%.2f%%)" % (results.mean()*100, results.std()*100))
+#print(model.metrics_names[1], scores[1]*100)

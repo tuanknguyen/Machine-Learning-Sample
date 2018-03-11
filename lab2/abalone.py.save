@@ -1,0 +1,22 @@
+from keras.models import Sequential
+from keras.layers import Dense
+import tensorflow
+import pandas
+import numpy
+
+
+data = pandas.read_csv('abalone.data', names=None)
+print(data.iloc[0])
+y = data['rings'].values + 1.5
+del data['rings']
+
+# one hot encoding for sex column
+data['sex_m'] = np.where(df['sex']=='M', 1, 0)
+df['color'] = np.where(df['Set']=='Z', 'green', 'red')
+x = data.values
+print(y[0:3])
+
+model = Sequential()
+model.add(Dense(12, input_dim=8, activation='relu'))
+model.add(Dense(6, activation='relu'))
+model.add(Dense(1, activation='softmax'))
