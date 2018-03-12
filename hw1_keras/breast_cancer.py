@@ -42,7 +42,7 @@ model.add(Dense(10, activation='relu'))
 model.add(Dense(7, activation='relu'))
 model.add(Dense(2, activation='softmax'))
 model.compile(loss='binary_crossentropy', optimizer='rmsprop', metrics=['accuracy'])
-model.fit(x_train, y_train, epochs=30, batch_size=32,verbose=0)
+model.fit(x_train, y_train, epochs=25, batch_size=32,verbose=1)
 scores = model.evaluate(x_test, y_test,verbose=0)
 
 K.clear_session()
