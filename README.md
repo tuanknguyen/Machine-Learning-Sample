@@ -1,4 +1,4 @@
-# UMD_MachineLearning
+# Machine Learning Sample
 
 ## Project 1: Multilayer Perceptron (MLP) Neural Network in Keras
 
